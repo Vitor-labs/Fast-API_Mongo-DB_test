@@ -2,15 +2,8 @@ from fastapi import FastAPI, Path, HTTPException, status
 from typing import Optional
 from pydantic import BaseModel
 
-
-"""
-FastAPI is a Python framework for building HTTP APIs.
-
-This is a basic project for a future FaRM Stack project.
-THIS IS NOT A REAL API. just a demo. Testing some stuff.
-the basic concept is a very simple CRUD api.
-"""
 # ============== CONSTANTS ==============
+NOT_FOUND_MSG = "Item specified not found"
 
 
 class Item(BaseModel):
@@ -56,7 +49,7 @@ def get_item(name: str):
     for item_id in inventory:
         if inventory[item_id].name == name:
             return inventory[item_id]
-    raise HTTPException(status_code=404, detail="Item not found")
+    raise HTTPException(status_code=404, detail=NOT_FOUND_MSG)
 
 
 @app.get("/get-all-items")
@@ -79,7 +72,7 @@ def update_item(item_id: int, item: Item):
             inventory[item_id].color = item.color
 
         return inventory[item_id]
-    raise HTTPException(status_code=404, detail="Item not found")
+    raise HTTPException(status_code=404, detail=NOT_FOUND_MSG)
 
 
 @app.post("/add-item")
@@ -94,4 +87,4 @@ def delete_item(item_id: int):
     if item_id in inventory:
         del inventory[item_id]
         return {"message": "Item deleted"}
-    raise HTTPException(status_code=404, detail="Item not found")
+    raise HTTPException(status_code=404, detail=NOT_FOUND_MSG)
