@@ -18,3 +18,4 @@
 ```sh
     python tests.py
 ```
+- Or use Postman : )
