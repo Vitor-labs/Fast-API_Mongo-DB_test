@@ -1,30 +1,24 @@
+import collections
+from API.config import connect
 import requests
-import json
 
 BASE = "http://127.0.0.1:8000/"
+collection = None
 
 
-def test_create_item():
-    item = {
-        "name": "Test",
-        "price": 10.0,
-        "quantity": 10,
-        "color": "Blue"
-    }
+def test_connection():
+    response = requests.get(BASE)
+    assert response.status_code == 200
+
     try:
-        response = requests.post(BASE + "add-item", json=item)
-        print(response.status_code)
-        print(response.text)
+        global collection
+        collection = connect()
+        assert collection is not None
 
+        response = requests.get(BASE + "itens")
+        assert response.status_code == 200
     except Exception as e:
-        print(e)
+        print("ERROR: " + str(e))
 
 
-def test_read_item():
-    try:
-        response = requests.get(BASE + "get-item/1")
-        print(response.status_code)
-        print(response.text)
-
-    except Exception as e:
-        print(e)
+test_connection()
