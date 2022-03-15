@@ -3,6 +3,7 @@ from typing import Optional
 
 
 class Item(BaseModel):
+    id: Optional[int]
     name: str
     color: str
     price: float
