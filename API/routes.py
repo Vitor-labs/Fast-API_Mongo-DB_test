@@ -14,11 +14,8 @@ def create_item(item: Item):
     if conn is None:
         return CONN_ERROR
 
-    item_id = conn.count() + 1
-    item.id = item_id
-    conn.insert_one(item.dict())
-
-    return {"message": f"Item {item.name} created with id {item_id}"}
+    item_id = conn.Item_Store.insert_one(item.dict()).inserted_id
+    return {"item_id": str(item_id)}
 # =================== [CREATES] ===================
 
 
@@ -62,7 +59,7 @@ def update_item(item_id: int, item: ItemUpdate):
     return {"message": "Item {item_id} updated"}
 
 
-@itens_routes.post("/{item_name}")
+@itens_routes.put("/{item_name}")
 def update_by_name(name: str, item: Item):
     conn = connect()
     if conn is None:

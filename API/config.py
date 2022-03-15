@@ -1,4 +1,3 @@
-
 from pymongo import MongoClient
 
 # ============== [CONSTANTS] ==============
@@ -21,7 +20,10 @@ def connect() -> MongoClient:
         assert client is not None
         print(f"Connected to MongoDB at {MONGO_URI}")
 
-        return client
+        db = client[MONGO_DB_NAME]
+        collection = db[MONGO_COLLECTION_NAME]
+
+        return collection
 
     except Exception as e:
         print("ERROR: " + str(e))

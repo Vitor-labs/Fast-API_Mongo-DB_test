@@ -21,4 +21,22 @@ def test_connection():
         print("ERROR: " + str(e))
 
 
-test_connection()
+def test_post():
+    try:
+        global collection
+        if collection is None:
+            collection = connect()
+
+        response = requests.post(
+            BASE + "itens", json={"name": "Teste", "color": "red", "price": 1.99, "quantity": 1, "is_offer": False})
+
+        assert response.status_code == 201
+        assert response.json()["item_id"] is not None
+
+        print(response.json())
+
+    except Exception as e:
+        print("ERROR: " + str(e))
+
+
+test_post()
