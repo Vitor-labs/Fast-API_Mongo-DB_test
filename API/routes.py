@@ -7,6 +7,21 @@ itens_routes = APIRouter()
 CONN_ERROR = {"error": "Connection error"}
 
 
+# =================== [CREATES] ===================
+@itens_routes.post("/")
+def create_item(item: Item):
+    conn = connect()
+    if conn is None:
+        return CONN_ERROR
+
+    item_id = conn.count() + 1
+    item.id = item_id
+    conn.insert_one(item.dict())
+
+    return {"message": f"Item {item.name} created with id {item_id}"}
+# =================== [CREATES] ===================
+
+
 # ==================== [READS] ====================
 @itens_routes.get("/")
 def get_all():
@@ -36,21 +51,6 @@ def get_item(item_id: int):
 # ==================== [READS] ====================
 
 
-# =================== [CREATES] ===================
-@itens_routes.post("/")
-def create_item(item: Item):
-    conn = connect()
-    if conn is None:
-        return CONN_ERROR
-
-    item_id = conn.count() + 1
-    item.id = item_id
-    conn.insert_one(item.dict())
-
-    return {"message": f"Item {item.name} created with id {item_id}"}
-# =================== [CREATES] ===================
-
-
 # =================== [UPDATES] ===================
 @itens_routes.put("/{item_id}")
 def update_item(item_id: int, item: ItemUpdate):
@@ -70,6 +70,7 @@ def update_by_name(name: str, item: Item):
 
     conn.update_one({"name": name}, {"$set": item.dict()})
     return {"message": "Item {name} updated"}
+
 
 @itens_routes.patch("/{item_id}")
 def update_item_partial(item_id: int, item: ItemUpdate):
