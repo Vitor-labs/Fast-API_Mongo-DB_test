@@ -10,6 +10,8 @@
 ### Falta Fazer:
 - Integrar com o Mongo ✔️
 - Criar Rotas de CRUD ✔️
+- Testar Todas as Rotas ✔️
+  - Delete & Update by name have problems with objectID
 - Autentificar as rotas
 - Alguma ideia que aparecer
 
@@ -17,14 +19,14 @@
 ## How to run:
 ```sh
     cd API
-    uvicorn app:app --reload
+    uvicorn app:api --reload
 ```
 
 ## Testing.
-```sh
+```python
     python tests.py
 ```
-- Or use Postman : )
+- Or use the Swagger UI : )
 
 ### Expected results:
 - All pass : )
