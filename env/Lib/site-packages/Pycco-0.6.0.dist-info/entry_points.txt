@@ -1,3 +1,0 @@
-[console_scripts]
-pycco = pycco.main:main
-
