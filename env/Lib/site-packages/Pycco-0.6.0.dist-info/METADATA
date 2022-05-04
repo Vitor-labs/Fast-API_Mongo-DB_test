@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: Pycco
+Version: 0.6.0
+Summary: A Python port of Docco: the original quick-and-dirty, hundred-line-long, literate-programming-style documentation generator.
+Home-page: https://pycco-docs.github.io/pycco/
+Author: Zach Smith
+Author-email: subsetpark@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Provides-Extra: monitoring
+Requires-Dist: markdown
+Requires-Dist: pygments
+Requires-Dist: pystache
+Requires-Dist: smartypants
+Provides-Extra: monitoring
+Requires-Dist: watchdog; extra == 'monitoring'
+
+UNKNOWN
+
+

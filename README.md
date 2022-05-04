@@ -21,6 +21,7 @@
     cd API
     uvicorn app:api --reload
 ```
+- or run the app.py file
 
 ## Testing.
 ```python

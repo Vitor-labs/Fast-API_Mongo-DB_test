@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 
+# === Models for Items operations ===
 class Item(BaseModel):
     name: str
     color: str

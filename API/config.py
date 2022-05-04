@@ -4,8 +4,8 @@ from pymongo import MongoClient
 MONGO_DB_NAME = "myFirstDatabase"
 MONGO_COLLECTION_NAME = "Tests"
 
-MONGO_USER = "lord of the colars"
-MONGO_PASSWORD = "its a mistake"
+MONGO_USER = "m001-student"
+MONGO_PASSWORD = "m001-mongodb-basics"
 MONGO_URI = f'mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@sandbox.iwqks.mongodb.net/{MONGO_DB_NAME}?retryWrites=true&w=majority'
 # ========================================
 

@@ -1,10 +1,12 @@
 from fastapi import APIRouter
 from bson.objectid import ObjectId
+# ====================== [INSIDE INPORTS] =========================
 from models import Item, ItemUpdate
 from config import connect
-from util import serial_item, serial_items, serial_item_update, serial_items_update
-
+from util import serial_item, serial_items, serial_item_update
+# ====================== [INSIDE INPORTS] =========================
 itens_routes = APIRouter()
+
 
 CONN_ERROR = {"error": "Connection error"}
 CREATE_ERROR = {"error": "Create error"}
@@ -98,13 +100,15 @@ async def update_item(item_id: str, item: ItemUpdate):  # Tested OK
 
 
 @itens_routes.put("/{item_name}")
-async def update_by_name(name: str, item: Item):  # Tested Fail in $set
+async def update_by_name(name: str, item: ItemUpdate):  # Tested Fail in $set
     conn = connect()
     if conn is None:
         return CONN_ERROR
 
     try:
-        conn.find_one_and_update({"name": name}, {"$set": dict(item)})
+        query = {"name": name}
+        new_values = {"$set": dict(item)}
+        conn.update_many(query, new_values)
         item = serial_item(conn.find_one({"name": name}))
         return {"Status": "OK", "Item": item}
 
